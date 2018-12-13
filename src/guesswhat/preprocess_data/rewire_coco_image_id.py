@@ -1,6 +1,7 @@
 import re
 import os
 from glob import glob
+from tqdm import tqdm
 
 import argparse
 
@@ -22,7 +23,7 @@ assert args.image_dir.startswith(os.path.sep), "The path must be a root path: ".
 assert args.data_out.startswith(os.path.sep), "The path must be a root path: ".format(args.data_out)
 
 for path in args.image_subdir:
-    for name in glob(os.path.join(args.image_dir, path, "*")):
+    for name in tqdm(glob(os.path.join(args.image_dir, path, "*"))):
 
         # retrieve id images
         res = re.match(r'.*_0*(\d+\.\w+)$', name)
